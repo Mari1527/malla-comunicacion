@@ -96,20 +96,22 @@ const creditosSpan = document.getElementById("creditos");
 
 let seleccionadas = JSON.parse(localStorage.getItem("materiasSeleccionadas")) || [];
 
-function guardarSeleccionadas() {
-  localStorage.setItem("materiasSeleccionadas", JSON.stringify(seleccionadas));
-}
-
-// Contamos la cantidad total de materias
 const totalMaterias = semestres.reduce((acc, sem) => acc + sem.materias.length, 0);
 
-function verificarFinalizacion() {
+function mostrarFelicitacion() {
   if (seleccionadas.length === totalMaterias) {
     setTimeout(() => {
       alert("🎓 ¡Felicitaciones, nueva comunicadora social! 💖 Has completado toda la malla.");
-    }, 300); // Pequeño retardo para que se vea natural
+    }, 300);
   }
 }
+
+function guardarSeleccionadas() {
+  localStorage.setItem("materiasSeleccionadas", JSON.stringify(seleccionadas));
+  alert("✅ ¡Tu selección ha sido guardada!");
+}
+
+document.getElementById("guardarBtn").addEventListener("click", guardarSeleccionadas);
 
 semestres.forEach((sem, i) => {
   const semDiv = document.createElement("div");
@@ -139,8 +141,7 @@ semestres.forEach((sem, i) => {
       }
 
       creditosSpan.textContent = totalCreditos;
-      guardarSeleccionadas();
-      verificarFinalizacion();
+      mostrarFelicitacion();
     });
 
     semDiv.appendChild(matDiv);
@@ -150,4 +151,4 @@ semestres.forEach((sem, i) => {
 });
 
 creditosSpan.textContent = totalCreditos;
-verificarFinalizacion();
+mostrarFelicitacion();

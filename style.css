@@ -65,3 +65,18 @@ h1 {
   color: white;
   font-weight: bold;
 }
+#guardarBtn {
+  background-color: #c2185b;
+  color: white;
+  border: none;
+  padding: 0.7em 1.5em;
+  border-radius: 8px;
+  font-size: 1em;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+#guardarBtn:hover {
+  background-color: #a0154d;
+}
