@@ -94,25 +94,53 @@ let totalCreditos = 0;
 const contenedor = document.getElementById("semestres");
 const creditosSpan = document.getElementById("creditos");
 
-semestres.forEach(sem => {
+let seleccionadas = JSON.parse(localStorage.getItem("materiasSeleccionadas")) || [];
+
+function guardarSeleccionadas() {
+  localStorage.setItem("materiasSeleccionadas", JSON.stringify(seleccionadas));
+}
+
+// Contamos la cantidad total de materias
+const totalMaterias = semestres.reduce((acc, sem) => acc + sem.materias.length, 0);
+
+function verificarFinalizacion() {
+  if (seleccionadas.length === totalMaterias) {
+    setTimeout(() => {
+      alert("🎓 ¡Felicitaciones, nueva comunicadora social! 💖 Has completado toda la malla.");
+    }, 300); // Pequeño retardo para que se vea natural
+  }
+}
+
+semestres.forEach((sem, i) => {
   const semDiv = document.createElement("div");
   semDiv.classList.add("semestre");
   semDiv.innerHTML = `<h2>${sem.nombre}</h2>`;
 
-  sem.materias.forEach(mat => {
+  sem.materias.forEach((mat, j) => {
+    const idMateria = `s${i}m${j}`;
     const matDiv = document.createElement("div");
     matDiv.classList.add("materia");
     matDiv.textContent = `${mat.nombre} (${mat.creditos} créditos)`;
+
+    if (seleccionadas.includes(idMateria)) {
+      matDiv.classList.add("seleccionada");
+      totalCreditos += mat.creditos;
+    }
 
     matDiv.addEventListener("click", () => {
       if (!matDiv.classList.contains("seleccionada")) {
         totalCreditos += mat.creditos;
         matDiv.classList.add("seleccionada");
+        seleccionadas.push(idMateria);
       } else {
         totalCreditos -= mat.creditos;
         matDiv.classList.remove("seleccionada");
+        seleccionadas = seleccionadas.filter(id => id !== idMateria);
       }
+
       creditosSpan.textContent = totalCreditos;
+      guardarSeleccionadas();
+      verificarFinalizacion();
     });
 
     semDiv.appendChild(matDiv);
@@ -120,3 +148,6 @@ semestres.forEach(sem => {
 
   contenedor.appendChild(semDiv);
 });
+
+creditosSpan.textContent = totalCreditos;
+verificarFinalizacion();
