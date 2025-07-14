@@ -1,0 +1,67 @@
+body {
+  font-family: 'Arial Rounded MT Bold', sans-serif;
+  background: linear-gradient(to bottom right, #ffe4f0, #ffd6ec);
+  color: #4a004e;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+  padding: 1.5em;
+  background-color: #ffb6d9;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+.credit-counter {
+  margin-top: 0.5em;
+  font-weight: bold;
+}
+
+#semestres {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1em;
+  padding: 1em;
+}
+
+.semestre {
+  background-color: #fff0f6;
+  border-radius: 15px;
+  padding: 1em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.semestre h2 {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  color: #c2185b;
+}
+
+.materia {
+  background: #ffe1ec;
+  border: 1px solid #ffb6d9;
+  padding: 0.5em;
+  border-radius: 10px;
+  margin: 0.4em 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.materia:hover {
+  background-color: #ffcfe4;
+  transform: scale(1.03);
+}
+
+.materia.seleccionada {
+  background-color: #c2185b;
+  color: white;
+  font-weight: bold;
+}
